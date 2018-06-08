@@ -1,0 +1,16 @@
+.container {
+    --n: 1;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    width: calc(var(--n)*100%);
+    overflow-y: hidden;
+    height: 50vw;
+    max-height: 100vh;
+}
+
+.container img {
+    min-width: 100%; /* needed so Firefox doesn't make img shrink to fit */
+    width: 100%; /* can't take this out either as it breaks Chrome */
+    width: calc(100%/var(--n));
+}
