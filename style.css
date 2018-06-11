@@ -1,3 +1,6 @@
+body {
+    overflow-x: hidden;
+}
 .container {
     --n: 1;
     display: flex;
@@ -7,10 +10,14 @@
     overflow-y: hidden;
     height: 50vw;
     max-height: 100vh;
+    transform: translate(calc(var(--i, 0)/var(--n)*-100% + var(--tx, 0px)));
 }
 
 .container img {
-    min-width: 100%; /* needed so Firefox doesn't make img shrink to fit */
+    /*min-width: 100%; !* needed so Firefox doesn't make img shrink to fit *!*/
     width: 100%; /* can't take this out either as it breaks Chrome */
     width: calc(100%/var(--n));
+    pointer-events: none;
 }
+
+.smooth { transition: transform calc(var(--f, 1)*.5s) ease-out; }
