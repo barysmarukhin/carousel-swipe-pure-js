@@ -1,5 +1,6 @@
 const _C = document.querySelector('.container'),
-    N = _C.children.length, NF = 30,
+    N = _C.children.length,//quantity of items
+    NF = 30,//quantity of frames
     TFN = {
         'linear': function(k) { return k },
         'ease-in': function(k, e = 1.675) {
@@ -20,7 +21,7 @@ function stopAni() {
     rID = null
 };
 
-function ani(cf = 0) {
+function ani(cf = 0, counter) {
     _C.style.setProperty('--i', ini + (fin - ini)*TFN['ease-out'](cf/anf));
 
     if(cf === anf) {
@@ -49,21 +50,24 @@ function drag(e) {
 };
 
 function move(e) {
+    let counter = 0;
     if(locked) {
         let dx = unify(e).clientX - x0,
             s = Math.sign(dx),
             f = +(s*dx/w).toFixed(2);
 
         ini = i - s*f;
+        console.log('ini', ini);
 
         if((i > 0 || s < 0) && (i < N - 1 || s > 0) && f > .2) {
             i -= s;
-            f = 1 - f
+            f = 1 - f;
         }
 
-        fin = i;
+        fin = i;//index of next item
+        console.log('fin', fin);
         anf = Math.round(f*NF);
-        ani();
+        ani(counter);
         x0 = null;
         locked = false;
     }

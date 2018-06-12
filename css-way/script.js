@@ -17,17 +17,18 @@ function lock(e) {
 
 function move(e) {
     if(locked) {
-        let dx = unify(e).clientX - x0, s = Math.sign(dx),
-            f = +(s*dx/w).toFixed(2);
+        let dx = unify(e).clientX - x0,//horizontal offset in pixels
+            s = Math.sign(dx),
+            f = +(s*dx/w).toFixed(2);//horizontal offset as part of the whole item width
 
         if((i > 0 || s < 0) && (i < N - 1 || s > 0) && f > .2) {
-            _C.style.setProperty('--i', i -= s);
-            f = 1 - f
+            _C.style.setProperty('--i', i -= s);//change index if next item exist and if offset via X not less than 20%
+            f = 1 - f; //for next usage to configure the animation speed
         }
 
         _C.style.setProperty('--tx', '0px');
-        _C.style.setProperty('--f', f);
-        _C.classList.toggle('smooth', !(locked = false));
+        _C.style.setProperty('--f', f); //uses for animation speed
+        _C.classList.toggle('smooth', !(locked = false));//enable smooth animation via transform
         x0 = null
     }
 };
@@ -41,7 +42,7 @@ function unify(e) { return e.changedTouches ? e.changedTouches[0] : e };
 function drag(e) {
     e.preventDefault();
     if(locked) {
-        _C.style.setProperty('--tx', `${Math.round(unify(e).clientX - x0)}px`)
+        _C.style.setProperty('--tx', `${Math.round(unify(e).clientX - x0)}px`)//horizontal offset in pixels
     }
 };
 

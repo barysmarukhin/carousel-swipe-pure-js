@@ -20,4 +20,5 @@ body {
     pointer-events: none;
 }
 
+/*"f = 1 - f" is used for animation speed. The larger touch offset is the slower animation speed itself*/
 .smooth { transition: transform calc(var(--f, 1)*.5s) ease-out; }
